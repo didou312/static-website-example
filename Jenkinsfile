@@ -5,7 +5,7 @@ pipeline {
        IMAGE_TAG = "1.21.1"
 //       PORT_EXPOSED = "80" à paraméter dans le job
        MASTER = "${ID_DOCKER}-master"
-       PRODUCTION = "${ID_DOCKER}-production"
+       DEV = "${ID_DOCKER}-dev"
      }
      agent none
      stages {
@@ -89,9 +89,9 @@ pipeline {
 
 
 
-     stage('Push image in production and deploy it') {
+     stage('Push image in DEV and deploy it') {
        when {
-              expression { GIT_BRANCH == 'origin/production' }
+              expression { GIT_BRANCH == 'origin/dev' }
             }
       agent any
       environment {
@@ -101,9 +101,9 @@ pipeline {
           script {
             sh '''
               heroku container:login
-              heroku create $PRODUCTION || echo "project already exist"
-              heroku container:push -a $PRODUCTION web
-              heroku container:release -a $PRODUCTION web
+              heroku create $DEV || echo "project already exist"
+              heroku container:push -a $DEV web
+              heroku container:release -a $DEV web
             '''
           }
         }
