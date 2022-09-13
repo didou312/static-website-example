@@ -1,8 +1,8 @@
 pipeline {
      environment {
        ID_DOCKER = "${ID_DOCKER_PARAMS}"
-       IMAGE_NAME = "nginx:1.21.1"
-       IMAGE_TAG = "latest"
+       IMAGE_NAME = "nginx"
+       IMAGE_TAG = "1.21.1"
 //       PORT_EXPOSED = "80" à paraméter dans le job
        STAGING = "${ID_DOCKER}-staging"
        PRODUCTION = "${ID_DOCKER}-production"
