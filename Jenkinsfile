@@ -35,7 +35,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                    curl http://172.17.0.1:${PORT_EXPOSED} | grep -q <title>Dimension by HTML5 UP</title>
+                    curl http://172.17.0.1:${PORT_EXPOSED} | grep -q '<title>Welcome</title>'
                 '''
               }
            }
