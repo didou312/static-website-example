@@ -4,7 +4,7 @@ pipeline {
        IMAGE_NAME = "nginx"
        IMAGE_TAG = "1.21.1"
 //       PORT_EXPOSED = "80" à paraméter dans le job
-       STAGING = "${ID_DOCKER}-staging"
+       MASTER = "${ID_DOCKER}-master"
        PRODUCTION = "${ID_DOCKER}-production"
      }
      agent none
@@ -67,7 +67,7 @@ pipeline {
           }
       }    
      
-     stage('Push image in staging and deploy it') {
+     stage('Push image in MASTER and deploy it') {
        when {
               expression { GIT_BRANCH == 'origin/master' }
             }
@@ -79,9 +79,9 @@ pipeline {
           script {
             sh '''
               heroku container:login
-              heroku create $STAGING || echo "project already exist"
-              heroku container:push -a $STAGING web
-              heroku container:release -a $STAGING web
+              heroku create $MASTER || echo "project already exist"
+              heroku container:push -a $MASTER web
+              heroku container:release -a $MASTER web
             '''
           }
         }
