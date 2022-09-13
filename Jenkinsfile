@@ -3,7 +3,7 @@ pipeline {
        ID_DOCKER = "${ID_DOCKER_PARAMS}"
        IMAGE_NAME = "nginx"
        IMAGE_TAG = "1.21.1"
-//       PORT_EXPOSED = "80" à paraméter dans le job
+       PORT_EXPOSED = "80" à paraméter dans le job
        STAGING = "${ID_DOCKER}-staging"
        PRODUCTION = "${ID_DOCKER}-production"
      }
@@ -35,7 +35,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                    curl -i http://172.17.0.1:${PORT_EXPOSED} | grep -q "Welcome"
+                    curl http://172.17.0.1:${PORT_EXPOSED} | grep -q <title>Dimension by HTML5 UP</title>
                 '''
               }
            }
